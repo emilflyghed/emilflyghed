@@ -50,7 +50,7 @@ while player_class not in ["mage","warrior","rogue"]:
         player_health += 100
         player_health = min(player_health, MAX_HEALTH)
         player_min_damage += 25
-        player_max_damage += 502
+        player_max_damage += 50
         break
     elif player_class == "rogue":
         MAX_HEALTH += 75
@@ -100,3 +100,5 @@ def combat(enemy_name, enemy_health, enemy_min_damage, enemy_max_damage):
 
 combat("Goblin",50,10,25)
 combat("Wolf",50,5,10)
+
+print("\nGame Over")
