@@ -179,3 +179,4 @@ print(exp_level_up)
 print(player_exp)
 
 print("\nGame Over")
+print("Test")
