@@ -1,3 +1,6 @@
+"""
+Below is the main code for the game to function.
+"""
 import random
 import sys
 
@@ -49,6 +52,7 @@ def level_up():
         player_exp -= exp_level_up
         exp_level_up += 20
         print("Level up!")
+        print(f"New level: {player_level}")
 
 
 # Function for drinking health potions
@@ -101,12 +105,12 @@ def combat(enemy_name, enemy_health, enemy_min_damage, enemy_max_damage):
     global player_health
     gained_exp = enemy_health / 2
     print(
-        f"\nA wild {colorize(enemy_name, 'red')} appears with {colorize(enemy_health, 'red')} HP!"
+        f"\nCombat started!\n{colorize(enemy_name, 'red')} appears with {colorize(enemy_health, 'red')} HP!"
     )
 
     while enemy_health > 0 and player_health > 0:
         print(
-            f"\n{player_name} HP: {colorize(player_health, 'green')}/{colorize(MAX_HEALTH, 'green')} | {colorize(enemy_name, 'red')} HP: {colorize(enemy_health, 'red')}"
+            f"\n{player_name} Level:{player_level} HP: {colorize(player_health, 'green')}/{colorize(MAX_HEALTH, 'green')} | {colorize(enemy_name, 'red')} HP: {colorize(enemy_health, 'red')}"
         )
         player_turn = True
         while player_turn is True:
@@ -120,7 +124,7 @@ def combat(enemy_name, enemy_health, enemy_min_damage, enemy_max_damage):
                 )
                 player_turn = False
 
-            elif action == "d" and health_potions >= 1: # Drink potion
+            elif action == "d" and health_potions >= 1:  # Drink potion
                 if drink_health_potion():
                     print(
                         f"You drank a potion. Your HP is now {colorize(player_health, 'green')}/{colorize(MAX_HEALTH, 'green')}."
@@ -129,14 +133,12 @@ def combat(enemy_name, enemy_health, enemy_min_damage, enemy_max_damage):
 
             elif action == "d" and health_potions <= 0:  # Out of potions
                 if drink_health_potion():
-                    print(
-                        "You're out of potions!"
-                    )
+                    print("You're out of potions!")
 
             else:
                 print("Invalid action!")
 
-            # If enemy is still alive, it attacks back
+        # If enemy is still alive, it attacks back
         if enemy_health > 0:
             enemy_damage = random.randint(enemy_min_damage, enemy_max_damage)
             player_health -= enemy_damage
@@ -146,36 +148,45 @@ def combat(enemy_name, enemy_health, enemy_min_damage, enemy_max_damage):
 
     # Combat outcome
     if player_health <= 0:
-        print("You were defeated...")
+        print("\nYou were defeated...")
+        # print({colorize("\nYou were defeated...", 'red')})
         input("Press Enter to quit the game...")
         sys.exit()
     else:
-        print(f"You defeated the {colorize(enemy_name, 'red')}!")
+        print(f"\nYou defeated the {colorize(enemy_name, 'red')}!")
         global player_exp
         player_exp += gained_exp
+        print(f"You gained {gained_exp}XP!")
         while player_exp >= exp_level_up:
             level_up()
 
     input("\nPress Enter to continue...")
 
 
-combat("Goblin", 50, 10, 25)
-print(exp_level_up)
-print(player_exp)
-combat("Wolf1", 50, 5, 10)
-print(exp_level_up)
-print(player_exp)
-combat("Wolf2", 50, 5, 10)
-print(exp_level_up)
-print(player_exp)
-combat("Wolf3", 50, 5, 10)
-print(exp_level_up)
-print(player_exp)
-combat("Wolf4", 50, 5, 10)
-print(exp_level_up)
-print(player_exp)
-combat("Wolf5", 50, 5, 10)
-print(exp_level_up)
-print(player_exp)
+"""
+This is where the game starts
+"""
 
-print("\nGame Over")
+# Chapter 1
+print("\nIn the kingdom of Zornheim, there is great turmoil and unrest.")
+input("Press Enter to continue...")
+print("\nYou have been hired by the adminstrator of Zorn, the capital of Zornheim, to slay the dragon which recently moved into the mountain of Quorthon.")
+input("Press Enter to continue...")
+print("\nYou have been promised great riches should you succeed and the key to the city.")
+input("Press Enter to continue...")
+print("\nYour first step in this adventure brings you to the village of Agon. Here you must find someone who can direct you to the mountain before the dragon strikes again.")
+input("Press Enter to continue...")
+
+while True:
+    village_path = int(input("\nWhere do you head first?\n[1] - The tavern\n[2] - The church\n[3] - The blacksmith\n[4] - The general store\nChoose: "))
+    if village_path == 1:
+        print("\nYou enter the tavern and ends up in a heated discussion between two villagers.")
+        input("Press Enter to continue...")
+        print("\nOne of the villager draws a knife and you step in to defend the defensless villager.")
+        input("Press Enter to continue...")
+        combat("Villager", 200, 100, 200)
+        print("HELLO")
+        input("Press Enter to continue...")
+        break
+
+
